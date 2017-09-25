@@ -1,0 +1,25 @@
+version: "3.3"
+
+volumes:
+  certs: {}
+
+services:
+  caddy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CADDY_VERSION: 0.10.9
+    image: stefanprodan/caddy:0.10.9
+    container_name: caddy
+    ports:
+      - 80:80
+      - 443:443
+      - 9180:9180
+    volumes:
+      - certs:/.caddy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 5s
+      timeout: 1s
+      retries: 3
