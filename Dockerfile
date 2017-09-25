@@ -27,7 +27,7 @@ RUN cd /go/src/github.com/mholt/caddy/caddy \
 FROM alpine:3.6
 
 # install deps
-RUN apk add --no-cache --no-progress openssh-client git tini ca-certificates
+RUN apk add --no-cache --no-progress tini ca-certificates
 
 # copy caddy binary
 COPY --from=builder /go/bin/caddy /usr/bin/caddy
