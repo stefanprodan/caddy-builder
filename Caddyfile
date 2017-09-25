@@ -1,0 +1,9 @@
+:80 {
+    gzip
+    browse
+    prometheus 0.0.0.0:9180
+    log stdout
+    errors stderr
+}
+
+
