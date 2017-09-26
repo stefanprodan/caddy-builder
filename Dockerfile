@@ -3,7 +3,7 @@ FROM golang:1.9-alpine as builder
 
 ARG CADDY_VERSION="0.10.9"
 
-RUN apk add --no-cache curl git
+RUN apk add --no-cache git
 
 # clone caddy
 RUN git clone https://github.com/mholt/caddy -b "v$CADDY_VERSION" /go/src/github.com/mholt/caddy \
