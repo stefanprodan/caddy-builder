@@ -5,8 +5,9 @@ services:
   - docker
 
 env:
-  - CADDY_VERSION: 0.10.9
-  - DOCKER_COMPOSE_VERSION: 1.16.1
+  global:
+    - CADDY_VERSION: 0.10.9
+    - DOCKER_COMPOSE_VERSION: 1.16.1
 
 before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
