@@ -64,7 +64,7 @@ Run Caddy container exposing 80, 443 and 9180 ports:
 docker-compose up -d
 ```
 
-Remove the container, www volume and image:
+Remove the container, `www` volume and image:
 
 ```bash
 docker-compose down -v --rmi all
@@ -92,7 +92,7 @@ $ docker run -d --name caddy \
     stefanprodan/caddy
 ```
 
-Expose the Prometheus metric endpoint:
+Expose the Prometheus metric endpoint on `http://localhost:9180/metrics`:
 
 ```bash
 $ docker run -d --name caddy \
@@ -171,6 +171,7 @@ services:
 
 The caddy-builder is MIT licensed and the Caddy 
 [source code](https://github.com/mholt/caddy/blob/master/LICENSE.txt) is Apache 2.0 licensed. 
-Because stefanprodan/caddy is built from source it's not subject to the EULA for 
-Caddy's official binary distributions. If you plan to use Caddy for commercial purposes use the official 
-Caddy distribution.   
+Because stefanprodan/caddy is built from source it's not subject to the 
+[EULA](https://github.com/mholt/caddy/blob/545fa844bbd188c1e5bff6926e5c410e695571a0/dist/EULA.txt) for 
+Caddy's official binary distributions. If you plan to use Caddy for commercial purposes you should 
+run the official Caddy distribution. 
