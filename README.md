@@ -50,11 +50,6 @@ services:
       - 9180:9180
     volumes:
       - certs:/.caddy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
-      interval: 5s
-      timeout: 1s
-      retries: 3
 ```
 
 Build the image with Docker Compose:
@@ -138,7 +133,8 @@ example.com {
 ### Running Caddy with Docker Swarm
 
 In order to deploy Caddy with a custom config on Docker Swarm, you need to use 
-Docker engine version 17.06 or later:
+Docker engine version 17.06 or later. The Caddy image has curl installed so 
+you can easily define a health check:
 
 ```yaml
 version: "3.3"
@@ -163,6 +159,18 @@ services:
       - certs:/.caddy
     deploy:
       mode: replicated
-      replicas: 1
-    
+      replicas: 1    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 5s
+      timeout: 1s
+      retries: 3
 ```
+
+### License
+
+The caddy-builder is MIT licensed and the Caddy 
+[source code](https://github.com/mholt/caddy/blob/master/LICENSE.txt) is Apache 2.0 licensed. 
+Because stefanprodan/caddy is built from source it's not subject to the EULA for 
+Caddy's official binary distributions. If you plan to use Caddy for commercial purposes use the official 
+Caddy distribution.   
