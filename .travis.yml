@@ -1,5 +1,5 @@
 sudo: required
-language: go
+language: generic
 
 services:
   - docker
@@ -20,8 +20,10 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-scripts:
-  - docker-compose build caddy
+script:
+  - CADDY_VERSION=$CADDY_VERSION docker-compose build caddy
+
+after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
     docker tag stefanprodan/caddy:$CADDY_VERSION stefanprodan/caddy:latest;
