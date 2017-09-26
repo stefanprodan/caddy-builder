@@ -4,6 +4,9 @@
     prometheus 0.0.0.0:9180
     log stdout
     errors stderr
+
+    ext .md
+    markdown
 }
 
 
