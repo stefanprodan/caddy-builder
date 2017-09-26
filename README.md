@@ -27,7 +27,7 @@ import (
 ```
 
 Edit the [docker-compose](https://github.com/stefanprodan/caddy-builder/blob/master/docker-compose.yml) 
-file and replace the image prefix with your own repo name.
+file and replace the image prefix with your own repo name:
 
 ```yaml
 version: "3.3"
@@ -75,7 +75,7 @@ Remove the container, www volume and image:
 docker-compose down -v --rmi all
 ```
 
-### Running Coddy
+### Running Caddy with Docker
 
 The [stefanprodan/caddy](https://hub.docker.com/r/stefanprodan/caddy/) comes with a default Caddyfile that 
 you can override by mounting your own config:
@@ -133,4 +133,36 @@ In your Caddyfile configure the tls email:
 example.com {
     tls contact@example.com
 }
+```
+
+### Running Caddy with Docker Swarm
+
+In order to deploy Caddy with a custom config on Docker Swarm, you need to use 
+Docker engine version 17.06 or later:
+
+```yaml
+version: "3.3"
+
+configs:
+  caddy_config:
+    file: ./Caddyfile
+
+volumes:
+  certs: {}
+
+services:
+  caddy:
+    image: stefanprodan/caddy
+    ports:
+      - 80:80
+      - 443:443
+    configs:
+      - source: caddy_config
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - certs:/.caddy
+    deploy:
+      mode: replicated
+      replicas: 1
+    
 ```
