@@ -5,6 +5,4 @@ import (
 	_ "github.com/miekg/caddy-prometheus"
 	// http.ipfilter
 	_ "github.com/pyed/ipfilter"
-	// http.filemanager
-	_ "github.com/hacdias/filemanager/caddy/filemanager"
 )

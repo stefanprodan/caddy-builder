@@ -34,13 +34,14 @@ COPY --from=builder /go/bin/caddy /usr/bin/caddy
 # list plugins
 RUN /usr/bin/caddy -plugins
 
-EXPOSE 80 443 9180
-
+# static files volume
 VOLUME ["/www"]
 WORKDIR /www
 
 COPY Caddyfile /etc/caddy/Caddyfile
 COPY index.md /www/index.md
+
+EXPOSE 80 443 9180
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["caddy", "-agree", "--conf", "/etc/caddy/Caddyfile"]

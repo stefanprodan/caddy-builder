@@ -6,7 +6,6 @@ title = "Caddy Web Server"
 
 Plugins:
 
-* http.filemanager
 * http.ipfilter
 * http.prometheus
 
