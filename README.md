@@ -32,9 +32,6 @@ file and replace the image prefix with your own repo name:
 ```yaml
 version: "3.3"
 
-volumes:
-  certs: {}
-
 services:
   caddy:
     build:
@@ -48,8 +45,6 @@ services:
       - 80:80
       - 443:443
       - 9180:9180
-    volumes:
-      - certs:/.caddy
 ```
 
 Build the image with Docker Compose:
@@ -171,7 +166,7 @@ services:
 
 The caddy-builder is MIT licensed and the Caddy 
 [source code](https://github.com/mholt/caddy/blob/master/LICENSE.txt) is Apache 2.0 licensed. 
-Because stefanprodan/caddy is built from source it's not subject to the 
+Because stefanprodan/caddy is built from source, it's not subject to the 
 [EULA](https://github.com/mholt/caddy/blob/545fa844bbd188c1e5bff6926e5c410e695571a0/dist/EULA.txt) for 
 Caddy's official binary distributions. If you plan to use Caddy for commercial purposes you should 
 run the official Caddy distribution. 
