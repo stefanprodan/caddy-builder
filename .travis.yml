@@ -1,0 +1,30 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - CADDY_VERSION: 0.10.9
+  - DOCKER_COMPOSE_VERSION: 1.16.1
+
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  - sudo service docker restart
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+scripts:
+  - CADDY_VERSION=$CADDY_VERSION docker-compose build caddy
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
+    docker tag stefanprodan/caddy:$CADDY_VERSION stefanprodan/caddy:latest;
+    docker push stefanprodan/caddy:$CADDY_VERSION;
+    docker push stefanprodan/caddy:latest;
+    fi
