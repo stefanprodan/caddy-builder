@@ -41,7 +41,5 @@ WORKDIR /www
 COPY Caddyfile /etc/caddy/Caddyfile
 COPY index.md /www/index.md
 
-EXPOSE 80 443 9180
-
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["caddy", "-agree", "--conf", "/etc/caddy/Caddyfile"]
