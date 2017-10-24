@@ -6,7 +6,7 @@ services:
 
 env:
   global:
-    - CADDY_VERSION: 0.10.9
+    - CADDY_VERSION: 0.10.10
     - DOCKER_COMPOSE_VERSION: 1.16.1
 
 before_install:
