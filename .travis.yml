@@ -24,7 +24,7 @@ script:
   - CADDY_VERSION=$CADDY_VERSION docker-compose build caddy
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - if [ ! -s "$DOCKER_USER" ] ; then
     docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
     docker tag openfaas/caddy:$CADDY_VERSION openfaas/caddy:latest;
     docker push openfaas/caddy:$CADDY_VERSION;
