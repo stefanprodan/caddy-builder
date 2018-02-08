@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
       args:
         CADDY_VERSION: ${CADDY_VERSION:-0.10.9}
-    image: stefanprodan/caddy:${CADDY_VERSION:-0.10.9}
+    image: openfaas/caddy:${CADDY_VERSION:-0.10.9}
     container_name: caddy
     ports:
       - 80:80

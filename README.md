@@ -1,6 +1,6 @@
 # caddy-builder
 
-[![Build Status](https://travis-ci.org/stefanprodan/caddy-builder.svg?branch=master)](https://travis-ci.org/stefanprodan/caddy-builder)
+[![Build Status](https://travis-ci.org/openfaas/caddy-builder.svg?branch=master)](https://travis-ci.org/openfaas/caddy-builder)
 
 Build Caddy with plugins from source using Docker multi-build
 
@@ -9,7 +9,7 @@ Build Caddy with plugins from source using Docker multi-build
 Clone the caddy-builder repository:
 
 ```bash
-$ git clone https://github.com/stefanprodan/caddy-builder.git
+$ git clone https://github.com/openfaas/caddy-builder.git
 $ cd caddy-builder
 ```
 
@@ -26,7 +26,7 @@ import (
 )
 ```
 
-Edit the [docker-compose](https://github.com/stefanprodan/caddy-builder/blob/master/docker-compose.yml) 
+Edit the [docker-compose](https://github.com/openfaas/caddy-builder/blob/master/docker-compose.yml) 
 file and replace the image prefix with your own repo name:
 
 ```yaml
@@ -39,7 +39,7 @@ services:
       dockerfile: Dockerfile
       args:
         CADDY_VERSION: ${CADDY_VERSION:-0.10.9}
-    image: stefanprodan/caddy:${CADDY_VERSION:-0.10.9}
+    image: openfaas/caddy:${CADDY_VERSION:-0.10.9}
     container_name: caddy
     ports:
       - 80:80
@@ -67,14 +67,14 @@ docker-compose down -v --rmi all
 
 ### Running Caddy with Docker
 
-The [stefanprodan/caddy](https://hub.docker.com/r/stefanprodan/caddy/) comes with a default Caddyfile that 
+The [openfaas/caddy](https://hub.docker.com/r/openfaas/caddy/) comes with a default Caddyfile that 
 you can override by mounting your own config:
 
 ```bash
 $ docker run -d --name caddy \
     -v $(pwd)/Caddyfile:/etc/caddy/Caddyfile \
     -p 80:80 \
-    stefanprodan/caddy
+    openfaas/caddy
 ```
 
 Mount your site root using the `www` volume:
@@ -84,7 +84,7 @@ $ docker run -d --name caddy \
     -v $(pwd)/Caddyfile:/etc/caddy/Caddyfile \
     -v $(pwd)/site:/www \
     -p 80:80 \
-    stefanprodan/caddy
+    openfaas/caddy
 ```
 
 Expose the Prometheus metric endpoint on `http://localhost:9180/metrics`:
@@ -94,7 +94,7 @@ $ docker run -d --name caddy \
     -v $(pwd)/Caddyfile:/etc/caddy/Caddyfile \
     -v $(pwd)/site:/www \
     -p 80:80 -p 9180:9180 \
-    stefanprodan/caddy
+    openfaas/caddy
 ```
 
 In your Caddyfile configure the http.prometheus plugin:
@@ -114,7 +114,7 @@ $ docker run -d --name caddy \
     -v $(pwd)/Caddyfile:/etc/caddy/Caddyfile \
     -v $(pwd)/certs:/.caddy \
     -p 80:80 -p 443:443 \
-    stefanprodan/caddy
+    openfaas/caddy
 ```
 
 In your Caddyfile configure the tls email:
@@ -143,7 +143,7 @@ volumes:
 
 services:
   caddy:
-    image: stefanprodan/caddy
+    image: openfaas/caddy
     ports:
       - 80:80
       - 443:443
@@ -166,7 +166,7 @@ services:
 
 The caddy-builder is MIT licensed and the Caddy 
 [source code](https://github.com/mholt/caddy/blob/master/LICENSE.txt) is Apache 2.0 licensed. 
-Because stefanprodan/caddy is built from source, it's not subject to the 
+Because openfaas/caddy is built from source, it's not subject to the 
 [EULA](https://github.com/mholt/caddy/blob/545fa844bbd188c1e5bff6926e5c410e695571a0/dist/EULA.txt) for 
 Caddy's official binary distributions. If you plan to use Caddy for commercial purposes you should 
 run the official Caddy distribution. 

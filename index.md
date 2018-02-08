@@ -9,4 +9,4 @@ Plugins:
 * http.ipfilter
 * http.prometheus
 
-Builder project [stefanprodan/caddy-builder](https://github.com/stefanprodan/caddy-builder)
+Builder project [openfaas/caddy-builder](https://github.com/openfaas/caddy-builder)
